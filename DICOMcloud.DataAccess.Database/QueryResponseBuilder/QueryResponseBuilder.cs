@@ -112,7 +112,7 @@ namespace DICOMcloud.DataAccess.Database
                         if ( column.Table.IsSequence )
                         { 
                             DicomSequence sq = (DicomSequence) CurrentData.ForeignDs.GetSequence (CurrentData.ForeignTagValue) ;
-                            DicomDataset item = new DicomDataset ( ) { AutoValidate = false };
+                            DicomDataset item = new DicomDataset ( );
 
                             sq.Items.Add ( item ) ;
 

@@ -29,6 +29,8 @@ namespace DICOMcloud.Wado
         {
             //validation code should go in here
             if (null == request || string.Compare(request.RequestType, "WADO", true ) != 0 )
+
+
             {
                 throw new DCloudException("Request Type must be set to WADO");
             }

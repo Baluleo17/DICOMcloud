@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DICOMcloud.Media
 {
@@ -100,6 +101,11 @@ namespace DICOMcloud.Media
             out MediaTypeWithQualityHeaderValue mediaType
         )
         {
+            foreach (var media in httpHeaderValueCollection)
+            {
+                Console.WriteLine($"Accept header media type: {media.MediaType}");
+            }
+
             mediaType = httpHeaderValueCollection.FirstOrDefault(n=>n.MediaType.Equals(MimeType, StringComparison.InvariantCultureIgnoreCase )) ;
 
             return  mediaType != null ;

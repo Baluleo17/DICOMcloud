@@ -96,20 +96,21 @@ namespace DICOMcloud.Wado
             HttpResponseMessage response ;
             MultipartContent multiContent ;
             MediaTypeWithQualityHeaderValue selectedMediaTypeHeader ;
-            
 
-            if ( !IsMultiPartRequest ( header ) )
-            {
-                return  new HttpResponseMessage ( System.Net.HttpStatusCode.NotAcceptable ) ; //TODO: check error code in standard
-            }
+
+            //if (!IsMultiPartRequest(header))
+            //{
+            //    return new HttpResponseMessage(System.Net.HttpStatusCode.NotAcceptable); //TODO: check error code in standard
+            //}
 
             response        = new HttpResponseMessage ( ) ;
             multiContent    = new MultipartContent ( "related", MultipartResponseHelper.DicomDataBoundary ) ;           
             selectedMediaTypeHeader = null ;
 
             response.Content = multiContent ;
+            header.AcceptHeader.Add(new MediaTypeWithQualityHeaderValue("multipart/related"));
 
-            foreach ( var mediaTypeHeader in header.AcceptHeader ) 
+            foreach ( var mediaTypeHeader in  header.AcceptHeader ) 
             {
 
                 if ( request is IWadoRsFramesRequest )
@@ -240,7 +241,7 @@ namespace DICOMcloud.Wado
         protected virtual IEnumerable<IWadoRsResponse> ProcessMultipartRequest
         (
             IObjectId objectID,
-            MediaTypeWithQualityHeaderValue mediaTypeHeader
+            MediaTypeHeaderValue mediaTypeHeader
             
         )
         {
@@ -249,7 +250,7 @@ namespace DICOMcloud.Wado
             string              defaultTransfer = null;
             bool                instancesFound = false ;
 
-            subMediaType = MultipartResponseHelper.GetSubMediaType(mediaTypeHeader) ;
+            subMediaType = "application/octet-stream";//MultipartResponseHelper.GetSubMediaType(mediaTypeHeader) ;
 
             DefaultMediaTransferSyntax.Instance.TryGetValue ( subMediaType, out defaultTransfer );
 

@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using DICOMcloud.Media;
 using DICOMcloud.Wado.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DICOMcloud.Wado
 {
@@ -38,7 +41,7 @@ namespace DICOMcloud.Wado
             multiContent.Add ( sContent );
         }
 
-        public static IEnumerable<string> GetRequestedTransferSyntax  (  MediaTypeWithQualityHeaderValue mediaTypeHeader, string defaultTransfer )
+        public static IEnumerable<string> GetRequestedTransferSyntax  (MediaTypeHeaderValue mediaTypeHeader, string defaultTransfer )
         {
             //TODO: this should be extended to include query parameters in the request?
             List<string> transferSyntaxes ;
@@ -60,12 +63,12 @@ namespace DICOMcloud.Wado
             return transferSyntaxes ;
         }
 
-        public static string GetSubMediaType ( MediaTypeWithQualityHeaderValue mediaTypeHeader )
+        public static string GetSubMediaType (MediaTypeHeaderValue mediaTypeHeader )
         {
-        
-            var subMediaTypeHeader = mediaTypeHeader.Parameters.Where ( n => n.Name == "type" ).FirstOrDefault ( );
 
-            return subMediaTypeHeader.Value.Trim ( '"' ) ;
+            //var subMediaTypeHeader = mediaTypeHeader.Parameters.Where ( n => n.Name == "type" ).FirstOrDefault ( );
+
+            return "application / octet - stream";//subMediaTypeHeader.Value.Trim ( '"' ) ;
         }
 
     }

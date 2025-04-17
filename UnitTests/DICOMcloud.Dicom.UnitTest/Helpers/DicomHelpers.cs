@@ -179,8 +179,6 @@ namespace DICOMcloud.UnitTest
         {
             var ds = new DicomDataset ( ) ;
 
-            ds.AutoValidate = false;
-
             ds.Add ( DicomTag.PatientID, "test-pid") ;
             ds.Add ( DicomTag.PatientName, "test^patient name" );
             ds.Add ( DicomTag.StudyInstanceUID, Study1UID );

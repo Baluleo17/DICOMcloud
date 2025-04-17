@@ -8,7 +8,7 @@ namespace DICOMcloud.DataAccess.Database
     { 
         private class EntityReadData
         {
-            public DicomDataset                     CurrentDs                 = new DicomDataset ( ) { AutoValidate = false };
+            public DicomDataset                     CurrentDs                 = new DicomDataset ( );
             public Dictionary<uint, PersonNameData> CurrentPersonNames        = new Dictionary<uint,PersonNameData> ( )  ; 
             public PersonNameData                   CurrentPersonNameData     = null ;
             public uint                             CurrentPersonNameTagValue = 0 ;
